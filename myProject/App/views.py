@@ -138,12 +138,13 @@ def add_basic_info(req):
                 contact_no = contact_no,
                 present_address = present_address,
                 permanent_address = permanent_address,
-                company_website = com_web,
-                linkedin = linkedin,
                 career_summary = career_summary,
                 age = age,
                 dob = dob,
             )
+            if req.user.user_type == "recruiter":
+                company_website = com_web,
+                linkedin = linkedin,
             current_user.save()
             
             add_basic_info.save()
@@ -904,7 +905,14 @@ def changePassword(req):
     return render(req,  "common/change_password.html")
 
 
+def applicantList(request, id):
+    applicants = ApplyNowModel.objects.filter(job=id)
+    jobs =  JobModel.objects.get(id=id)
 
+    # Get unique users from applicants
+    applicant_users = applicants.values_list('user', flat=True).distinct()
+    applicants_skill = SkillModel.objects.filter(user__in=applicant_users)
+    return render(request, 'common/applicant_list.html', {'apply_persons':applicants, 'applicants_skill':applicants_skill, 'jobs':jobs,})
 
 
 

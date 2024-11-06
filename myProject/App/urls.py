@@ -37,6 +37,7 @@ urlpatterns = [
     path('edit_interest/<int:id>', editInterest, name='edit_interest'),
     path('search/', search_job, name="search_job"),
     path('change_password/', changePassword, name='change_password'),
+    path('applicant_list/<int:id>', applicantList, name='applicantList'),
     path('', home, name='home'),
     path('contact/', contact, name='contact'),
 ]

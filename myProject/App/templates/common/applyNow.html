@@ -59,7 +59,7 @@
                         
                 {% elif user.user_type == "recruiter" and data.user.id == user.id %}     
                  <a class="btn btn-warning" href="{% url 'job_edit' data.id %}">Edit Job</a> 
-                 <a class="btn btn-success" href="#">Applicants ({{applicants_counting}})</a> 
+                 <a class="btn btn-success" href="{% url 'applicantList' data.id %}">Applicants ({{applicants_counting}})</a> 
                  <a class="btn btn-danger" href="{% url 'job_delete' data.id %}">Delete Job</a>
 
                 {% endif %}
